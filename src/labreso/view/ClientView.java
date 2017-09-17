@@ -8,7 +8,7 @@ package labreso.view;
 import labreso.controller.Client;
 
 /**
- *
+ *Tela inicial do jogo que recebe informacoes da conexao com o server
  * @author 940437
  */
 public class ClientView extends javax.swing.JFrame {
@@ -150,12 +150,19 @@ public class ClientView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Acao clique entrar
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Pega conteudo campo de host
         String host = jTextField2.getText();
+        //Pega conteundo campo porta
         int port = Integer.parseInt(jTextField3.getText());
+        //Pega conteudo campo nome jogador
         String name = jTextField1.getText();
+        //Cria um nova tela do jogo passando dados da tela corrente
         GameView game = new GameView(host,port,name);
+        //esconde tela atual
         this.setVisible(false);
+        //mostra tela do jogo
         game.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

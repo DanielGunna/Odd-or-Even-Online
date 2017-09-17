@@ -16,11 +16,11 @@ import labreso.controller.Client;
 import labreso.controller.DataReceiver;
 
 /**
- *
+ *Tela do jogo 
  * @author 940437
  */
 public class GameView extends javax.swing.JFrame implements DataReceiver.ClientListener {
-
+    
     private Thread thread;
     private Client client;
     private boolean gameStarted;
@@ -28,7 +28,7 @@ public class GameView extends javax.swing.JFrame implements DataReceiver.ClientL
     private String userName;
     private String[] opponents;
     private String[] actions;
-
+    private boolean allPlayersLoaded;
     /**
      * Creates new form GameView
      */
@@ -126,11 +126,11 @@ public class GameView extends javax.swing.JFrame implements DataReceiver.ClientL
     }//GEN-LAST:event_labelOneMouseClicked
 
     private void sendCommand(String command) {
-        if (gameStarted && !userPlayed) {
+        if ((gameStarted && allPlayersLoaded )&& !userPlayed) {
             changeUserIcon(labelUserOption, command);
             userPlayed = true;
             client.sendMessageToServer(command);
-        } else if (!gameStarted) {
+        } else if (!gameStarted || !allPlayersLoaded) {
             JOptionPane.showMessageDialog(rootPane, "Aguarde os outros jogadores!");
         } else if (userPlayed) {
             JOptionPane.showMessageDialog(rootPane, "Você ja realizou sua joagada, aguarde o resultado!");
@@ -194,6 +194,7 @@ public class GameView extends javax.swing.JFrame implements DataReceiver.ClientL
                 count++;
             }
         }
+        allPlayersLoaded = true;
         fillOpponentsData();
     }
 
